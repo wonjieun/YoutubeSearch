@@ -18,8 +18,11 @@ class SearchBar extends Component {
         //this.state.term = event.target.value //BAD!!!
         return (
             <div>
-                <input onChange={event => this.setState({ term: event.target.value })} />
-                Value of the input: {this.state.term}
+                <input
+                    // state가 변할 때마다 input이 업데이트
+                    value={this.state.term}
+                    // 입력할 때 마다 state를 업데이트하여 전체 컴포넌트를 리랜더링
+                    onChange={event => this.setState({ term: event.target.value })} />
             </div>
         );
     }
