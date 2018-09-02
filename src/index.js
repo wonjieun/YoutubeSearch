@@ -16,15 +16,23 @@
  */
 
   // node_modules에서 react 라이브러리를 불러오기
+  // npm으로 설치된 라이브러리는 패키지의 이름만 작성하고,
+  // 내가 직접 만든 파일을 가져오려면 상대 주소를 작성
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import SearchBar from './components/search_bar';
 
 const API_KEY = 'AIzaSyDkNmNdT5v1ppeAsfa3YVndECokBx09QnE';
 
  // Create a new component. This component should produce
  // some HTML
 const App = () => {
-    return <div>Hi!</div>;
+    return (
+        <div>
+            <SearchBar />
+        </div>
+    );
 }
 
  // Take this component's generated HTML and put it
