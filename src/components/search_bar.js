@@ -3,12 +3,25 @@ import React, { Component } from 'react';
 
 // ES6
 class SearchBar extends Component {
-    render() {
-        return <input onChange={event => console.log(event.target.value)} />;
+    // state를 정의, 재초기화
+    // 함수형 컴포넌트는 state를 갖지 않는다.
+    // 클래스 기반 컴포넌트만 state를 갖는다.
+    constructor(props) {
+        // Component constructor() 가짐.
+        super(props);
+
+        // 새로운 Object 생성, 초기화 -> this.state에 할당
+        this.state = { term: '' };
     }
 
-    onInputChange(event) {
-        console.log(event.target.value);
+    render() {
+        //this.state.term = event.target.value //BAD!!!
+        return (
+            <div>
+                <input onChange={event => this.setState({ term: event.target.value })} />
+                Value of the input: {this.state.term}
+            </div>
+        );
     }
 }
 
