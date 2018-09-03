@@ -18,21 +18,37 @@
   // node_modules에서 react 라이브러리를 불러오기
   // npm으로 설치된 라이브러리는 패키지의 이름만 작성하고,
   // 내가 직접 만든 파일을 가져오려면 상대 주소를 작성
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-
+import search from 'youtube-api-search';
 import SearchBar from './components/search_bar';
-
 const API_KEY = 'AIzaSyDkNmNdT5v1ppeAsfa3YVndECokBx09QnE';
+
 
  // Create a new component. This component should produce
  // some HTML
-const App = () => {
-    return (
-        <div>
-            <SearchBar />
-        </div>
-    );
+ // 변화 되어야 할 값 (videos)가 존재하기 때문에 클래스 기반 컴포넌트로 변경
+class App extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = { videos: [] };
+
+        search({key: API_KEY, term: 'surfboards'}, (videos) => {
+            // console.log(data);
+            // this.setState({ videos: videos });
+            // key와 value가 같을 때
+            this.setState({ videos });
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <SearchBar />
+            </div>
+        );
+    }
 }
 
  // Take this component's generated HTML and put it
