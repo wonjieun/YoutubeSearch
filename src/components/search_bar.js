@@ -22,9 +22,16 @@ class SearchBar extends Component {
                     // state가 변할 때마다 input이 업데이트
                     value={this.state.term}
                     // 입력할 때 마다 state를 업데이트하여 전체 컴포넌트를 리랜더링
-                    onChange={event => this.setState({ term: event.target.value })} />
+                    onChange={event => this.onInputChange(event.target.value)} />
             </div>
         );
+    }
+
+    onInputChange(term) {
+        // 1. setState
+        this.setState({term});
+        // 2. onSearchTermChange 콜백 함수 호출
+        this.props.onSearchTermChange(term);
     }
 }
 

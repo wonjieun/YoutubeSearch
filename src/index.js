@@ -18,6 +18,7 @@
   // node_modules에서 react 라이브러리를 불러오기
   // npm으로 설치된 라이브러리는 패키지의 이름만 작성하고,
   // 내가 직접 만든 파일을 가져오려면 상대 주소를 작성
+import _ from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import search from 'youtube-api-search';
@@ -39,7 +40,11 @@ class App extends Component {
             selectedVideo: null
         };
 
-        search({key: API_KEY, term: 'surfboards'}, (videos) => {
+        this.videoSearch('surfboards');
+    }
+
+    videoSearch(term) {
+        search({key: API_KEY, term: term}, (videos) => {
             // console.log(data);
             // this.setState({ videos: videos });
             // key와 value가 같을 때
@@ -51,9 +56,12 @@ class App extends Component {
     }
 
     render() {
+        const videoSearch = _.debounce((term) => { this.videoSearch(term) }, 300);
+
         return (
             <div>
-                <SearchBar />
+                {/* onSearchTermChange property */}
+                <SearchBar onSearchTermChange={videoSearch} />
                 <VideoDetail video={this.state.selectedVideo} />
                 <VideoList
                     onVideoSelect={selectedVideo => this.setState({selectedVideo})}
