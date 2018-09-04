@@ -17,7 +17,7 @@ class SearchBar extends Component {
     render() {
         //this.state.term = event.target.value //BAD!!!
         return (
-            <div>
+            <div className="search-bar">
                 <input
                     // state가 변할 때마다 input이 업데이트
                     value={this.state.term}
