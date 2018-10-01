@@ -3,15 +3,25 @@ import React, { Component } from 'react';
 
 // ES6
 class SearchBar extends Component {
+
+    state = {}
+
     // state를 정의, 재초기화
     // 함수형 컴포넌트는 state를 갖지 않는다.
     // 클래스 기반 컴포넌트만 state를 갖는다.
-    constructor(props) {
-        // Component constructor() 가짐.
-        super(props);
+    // constructor(props) {
+    //     // Component constructor() 가짐.
+    //     super(props);
 
-        // 새로운 Object 생성, 초기화 -> this.state에 할당
-        this.state = { term: '' };
+    //     // 새로운 Object 생성, 초기화 -> this.state에 할당
+    //     this.state = { term: '' };
+    // }
+
+    onInputChange(term) {
+        // 1. setState
+        this.setState({term});
+        // 2. onSearchTermChange 콜백 함수 호출
+        this.props.onSearchTermChange(term);
     }
 
     render() {
@@ -25,13 +35,6 @@ class SearchBar extends Component {
                     onChange={event => this.onInputChange(event.target.value)} />
             </div>
         );
-    }
-
-    onInputChange(term) {
-        // 1. setState
-        this.setState({term});
-        // 2. onSearchTermChange 콜백 함수 호출
-        this.props.onSearchTermChange(term);
     }
 }
 
